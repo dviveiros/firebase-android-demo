@@ -7,15 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
-import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -51,38 +48,6 @@ public class MainActivityFragment extends Fragment {
         //Firebase
         Firebase ref = new Firebase("https://gds-2015.firebaseio.com/tweets");
 
-        /*
-        Query queryRef = ref.limitToLast(MAX_TWEETS);
-        queryRef.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot snapshot, String previousChild) {
-                Tweet tweet = snapshot.getValue(Tweet.class);
-                updateTweetList(tweet);
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
-            }
-            // ....
-        });
-        */
-
         // read tweets
         ref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -109,6 +74,6 @@ public class MainActivityFragment extends Fragment {
         if ( mTweetListAdapter.getCount() >= MAX_TWEETS ) {
             mTweetListAdapter.remove( mTweetListAdapter.getItem( 0 ) );
         }
-        mTweetListAdapter.insert( tweet, 0 );
+        mTweetListAdapter.insert(tweet, 0);
     }
 }
